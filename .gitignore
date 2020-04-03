@@ -5,6 +5,7 @@
 *.so
 *.dylib
 gin-learn
+gin_learn
 # Test binary, built with `go test -c`
 *.test
 
