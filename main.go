@@ -7,7 +7,7 @@ import (
 )
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
-	f, _ := ioutil.ReadFile("hello.txt")
+	f, _ := ioutil.ReadFile("hello.html")
 	fmt.Fprintln(w, string(f))
 }
 
