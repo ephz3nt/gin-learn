@@ -2,18 +2,23 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
 )
 
 func sayHello(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintln(w, "hello world")
-	fmt.Fprintln(w, "hello world")
-	fmt.Fprintln(w, r.Host)
-	fmt.Fprintln(w, r.Header)
-	fmt.Fprintln(w, r.Method)
+	f, _ := ioutil.ReadFile("hello.txt")
+	fmt.Fprintln(w, string(f))
 }
 
 func main() {
+	addr := "0.0.0.0:20000"
 	http.HandleFunc("/hello", sayHello)
-	http.ListenAndServe("0.0.0.0:20000", nil)
+	err := http.ListenAndServe(addr, nil)
+	fmt.Println("server start on: ", addr)
+	if err != nil {
+		fmt.Println("server start failed, err: ", err)
+		return
+	}
+
 }
